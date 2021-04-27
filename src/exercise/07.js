@@ -61,9 +61,6 @@ function App() {
     setPokemonResource(null)
   }
 
-  // 🐨 Use React.SuspenseList throughout these Suspending components to make
-  // them load in a way that is not jarring to the user.
-  // 💰 there's not really a specifically "right" answer for this.
   return (
     <div className="pokemon-info-app">
       <div className={cn.root}>
@@ -71,6 +68,7 @@ function App() {
           onReset={handleReset}
           resetKeys={[pokemonResource]}
         >
+        <React.SuspenseList revealOrder="forwards">
           <React.Suspense fallback={fallback}>
             <NavBar pokemonResource={pokemonResource} />
           </React.Suspense>
@@ -85,6 +83,7 @@ function App() {
               <RightNav pokemonResource={pokemonResource} />
             </React.Suspense>
           </div>
+          </React.SuspenseList>
         </PokemonErrorBoundary>
       </div>
     </div>
